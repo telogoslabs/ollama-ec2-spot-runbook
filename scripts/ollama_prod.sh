@@ -12,6 +12,14 @@ echo "[INFO] Starting Ollama bootstrap $(date -Iseconds)"
 : "${MODEL_PULLS:=glm-4.7-flash:bf16,qwen3.5:122b,qwen3-coder-next:q8_0}"
 
 sudo apt-get install -y nvtop || true
+if ! command -v uv >/dev/null 2>&1; then
+  echo "[INFO] Installing uv"
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+else
+  echo "[INFO] uv already present"
+fi
+
+
 
 if ! command -v ollama >/dev/null 2>&1; then
   echo "[INFO] Installing Ollama"
